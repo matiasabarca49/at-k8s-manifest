@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sitio-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sitio-web
+  template:
+    metadata:
+      labels:
+        app: sitio-web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: sitio-web-vol
+              mountPath: /usr/share/nginx/html
+              readOnly: true
+      volumes:
+        - name: sitio-web-vol
+          persistentVolumeClaim:
+            claimName: sitio-web-pvc-mount
