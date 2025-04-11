@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sitio-web-pv
+  name: sitio-web-pv-mount
 spec:
   storageClassName: mi-clase
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadOnlyMany
   hostPath:
-    path: "/home/linux-pc/Escritorio/ATK8s/web" 
+    path: /mnt/sitio-web
