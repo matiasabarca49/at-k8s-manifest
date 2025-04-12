@@ -164,3 +164,21 @@ minikube -p at-profile -n at-k8s-f service sitio-web-service-mount
 
 El acceso se realiza mediante el navegador. 
 
+# Impactar Cambios realizados en el sitio web
+
+Para impactar cualquier cambio efectuado en el directorio del sitio web debemos Reinicar el Cluster.
+
+Eliminamos el cluster.
+
+```
+minikube delete -p at-profile 
+```
+
+Volvemos a crear el cluster Minikube con los cambios.
+
+```
+./start_Minikube.sh <RUTA_ABSOLUTA_DEL_DIRECTORIO_WEB>
+```
+
+
+
