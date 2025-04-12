@@ -86,32 +86,32 @@ En caso de que falle el despliegue Automatizado. **Realize el Despliegue manual*
 Vamos a crear un perfil de minikube nuevo, habilitar addons de métricas y almacenamiento. Por último montar el directorio del sitio web en el cluster que vamos a crear.  
 **NOTA:** Debes agregar la ruta absoluta del directorio donde clonaste el sitio web. De lo contrario no funcionará.
 ```
-minikube start -p at-prueba --driver=docker --addons=metrics-server,storage-provisioner --mount --mount-string=<DIRECTORIO_PAGINA_WEB>:/mnt/sitio-web
+minikube start -p at-profile --driver=docker --addons=metrics-server,storage-provisioner --mount --mount-string=<DIRECTORIO_PAGINA_WEB>:/mnt/sitio-web
 ```
 **NOTA:** La creación del cluster puede demorar unos minutos
 
 #### 2.2 - Cambiamos al perfil nuevo
 
 ```
-minikube profile at-prueba
+minikube profile at-profile
 ```
 
 #### 2.3 - Creamos el namespace
 
 ```
-kubectl create namespace at-k8s
+kubectl create namespace at-k8s-f
 ```
 
 #### 2.4 - Creamos el contexto
 
 ```
-kubectl config set-context at-context --user=at-prueba --cluster=at-prueba --namespace=at-k8s
+kubectl config set-context at-context-f --user=at-profile --cluster=at-profile --namespace=at-k8s-f
 ```
 
 #### 2.4 - Cambiamos al contexto nuevo
 
 ```
-kubectl config use-context at-context
+kubectl config use-context at-context-f
 ```
 ## 3 - Aplicación de los Manifiestos
 
@@ -159,7 +159,7 @@ kubectl apply -f manifest/service-mount.yaml
 ## 4 - Exponer el servicio para acceder al sitio web
 
 ```
-minikube -p at-prueba -n at-k8s service sitio-web-service-mount
+minikube -p at-profile -n at-k8s-f service sitio-web-service-mount
 ```
 
 El acceso se realiza mediante el navegador. 
